@@ -14,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 * @email ${email}
 * @date ${datetime}
 */
-public interface ${className} extends JpaRepository<${className}, ${className}>, JpaSpecificationExecutor<${className}> {
+public interface ${className}Repository extends JpaRepository<${className}, ${className}>, JpaSpecificationExecutor<${className}> {
 }

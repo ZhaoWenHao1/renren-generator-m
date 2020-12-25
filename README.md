@@ -1,6 +1,12 @@
 **项目说明** 
 - renren-generator是人人开源项目的代码生成器，可在线生成entity、xml、dao、service、html、js、sql代码，减少70%以上的开发任务
 <br> 
+  
+**TODO**
+- Dao基本方法
+- service基本方法
+- pom依赖
+- mybatis和jpa entity注解不同
 
 
 **如何交流、反馈、参与贡献？** 
