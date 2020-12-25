@@ -39,13 +39,14 @@ var vm = new Vue({
 	el:'#rrapp',
 	data:{
 		q:{
-			tableName: null
+			tableName: null,
+            ORMType: 'JPA'
 		}
 	},
 	methods: {
 		query: function () {
 			$("#jqGrid").jqGrid('setGridParam',{ 
-                postData:{'tableName': vm.q.tableName},
+                postData:{'tableName': vm.q.tableName, 'ORMType': vm.q.ORMType},
                 page:1 
             }).trigger("reloadGrid");
 		},
@@ -54,7 +55,7 @@ var vm = new Vue({
             if(tableNames == null){
                 return ;
             }
-            location.href = "sys/generator/code?tables=" + tableNames.join();
+            location.href = "sys/generator/code?tables=" + tableNames.join() + '&ORMType=' + vm.q.ORMType;
 		}
 	}
 });

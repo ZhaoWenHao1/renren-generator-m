@@ -3,12 +3,17 @@ package ${package}.${moduleName}.entity;
 import lombok.Data;
 
 import javax.persistence.Entity;
+#if(${hasAutoIncrement})
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+#end
 import javax.persistence.Id;
 
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
+#end
+#if(${hasDate})
+import java.util.Date;
 #end
 
 /**
@@ -25,10 +30,13 @@ public class ${className}Entity {
 	/**
 	 * $column.comments
 	 */
-	#if($column.columnName == $pk.columnName)
-@Id
-	#end
-private $column.attrType $column.attrname;
+#if($column.columnName == $pk.columnName)
+	@Id
+#end
+#if($column.extra == "auto_increment")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+#end
+	private $column.attrType $column.attrname;
 
 #end
 

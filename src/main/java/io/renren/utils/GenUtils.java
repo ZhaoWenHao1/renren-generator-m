@@ -33,9 +33,15 @@ public class GenUtils {
 
     private static String currentTableName;
 
-    public static List<String> getTemplates() {
+    public static List<String> getTemplates(String ORMType) {
         List<String> templates = new ArrayList<String>();
-        templates.add("template/Entity.java.vm");
+        if(Constant.ORMTYPE_JPA.equals(ORMType)){
+            templates.add("template/EntityJpa.java.vm");
+        }
+        else if(Constant.ORMTYPE_MYBATIS.equals(ORMType)){
+            templates.add("template/EntityMapper.java.vm");
+        }
+
         templates.add("template/Dao.xml.vm");
 
         templates.add("template/menu.sql.vm");
@@ -68,11 +74,13 @@ public class GenUtils {
      * 生成代码
      */
     public static void generatorCode(Map<String, String> table,
-                                     List<Map<String, String>> columns, ZipOutputStream zip) {
+                                     List<Map<String, String>> columns, ZipOutputStream zip, String ORMType) {
         //配置信息
         Configuration config = getConfig();
         boolean hasBigDecimal = false;
         boolean hasList = false;
+        boolean hasDate = false;
+        boolean hasAutoIncrement = false; // 是否有自增字段
         //表信息
         TableEntity tableEntity = new TableEntity();
         tableEntity.setTableName(table.get("tableName"));
@@ -107,6 +115,12 @@ public class GenUtils {
             if (!hasList && "array".equals(columnEntity.getExtra())) {
                 hasList = true;
             }
+            if(!hasDate && attrType.equals("Date")){
+                hasDate = true;
+            }
+            if(!hasAutoIncrement && columnEntity.getExtra().equals("auto_increment")){
+                hasAutoIncrement = true;
+            }
             //是否主键
             if ("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null) {
                 tableEntity.setPk(columnEntity);
@@ -138,6 +152,8 @@ public class GenUtils {
         map.put("columns", tableEntity.getColumns());
         map.put("hasBigDecimal", hasBigDecimal);
         map.put("hasList", hasList);
+        map.put("hasDate", hasDate);
+        map.put("hasAutoIncrement", hasAutoIncrement);
         map.put("mainPath", mainPath);
         map.put("package", config.getString("package"));
         map.put("moduleName", config.getString("moduleName"));
@@ -147,7 +163,7 @@ public class GenUtils {
         VelocityContext context = new VelocityContext(map);
 
         //获取模板列表
-        List<String> templates = getTemplates();
+        List<String> templates = getTemplates(ORMType);
         for (String template : templates) {
             //渲染模板
             StringWriter sw = new StringWriter();
@@ -306,7 +322,7 @@ public class GenUtils {
         if (template.contains("MongoChildrenEntity.java.vm")) {
             return packagePath + "entity" + File.separator + "inner" + File.separator + currentTableName+ File.separator + splitInnerName(className)+ "InnerEntity.java";
         }
-        if (template.contains("Entity.java.vm") || template.contains("MongoEntity.java.vm")) {
+        if (template.contains("EntityJpa.java.vm") || template.contains("EntityMapper.java.vm") || template.contains("MongoEntity.java.vm")) {
             return packagePath + "entity" + File.separator + className + "Entity.java";
         }
 
