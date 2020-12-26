@@ -37,20 +37,23 @@ public class GenUtils {
         List<String> templates = new ArrayList<String>();
         if(Constant.ORMTYPE_JPA.equals(ORMType)){
             templates.add("template/EntityJpa.java.vm");
+            templates.add("template/Repository.java.vm");
+            templates.add("template/ServiceJPA.java.vm");
+            templates.add("template/ServiceImplJPA.java.vm");
+
         }
         else if(Constant.ORMTYPE_MYBATIS.equals(ORMType)){
             templates.add("template/EntityMapper.java.vm");
+            templates.add("template/Dao.xml.vm");
+            templates.add("template/ServiceMybatis.java.vm");
+            templates.add("template/ServiceImplMybatis.java.vm");
+
         }
 
-        templates.add("template/Dao.xml.vm");
 
         templates.add("template/menu.sql.vm");
 
-        templates.add("template/Service.java.vm");
-        templates.add("template/ServiceImpl.java.vm");
         templates.add("template/Controller.java.vm");
-        templates.add("template/Dao.java.vm");
-        templates.add("template/Repository.java.vm");
 
         templates.add("template/index.vue.vm");
         templates.add("template/add-or-update.vue.vm");
@@ -334,11 +337,11 @@ public class GenUtils {
             return packagePath + "dao" + File.separator + className + "Repository.java";
         }
 
-        if (template.contains("Service.java.vm")) {
+        if (template.contains("ServiceMybatis.java.vm") || template.contains("ServiceJPA.java.vm")) {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-        if (template.contains("ServiceImpl.java.vm")) {
+        if (template.contains("ServiceImplMybatis.java.vm") || template.contains("ServiceImplJPA.java.vm")) {
             return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 

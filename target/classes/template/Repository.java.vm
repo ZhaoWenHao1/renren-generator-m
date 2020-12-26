@@ -2,7 +2,6 @@ package ${package}.${moduleName}.dao;
 
 import ${package}.${moduleName}.entity.${className}Entity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 ##<#list imports as import>
 ##import ${import};
 ##</#list>
@@ -14,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 * @email ${email}
 * @date ${datetime}
 */
-public interface ${className}Repository extends JpaRepository<${className}, ${className}>, JpaSpecificationExecutor<${className}> {
+public interface ${className}Repository extends JpaRepository<${className}Entity, Long> {
 }

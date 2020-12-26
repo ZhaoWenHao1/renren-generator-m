@@ -1,0 +1,14 @@
+package ${package}.${moduleName}.service.impl;
+
+
+import ${package}.${moduleName}.dao.${className}Repository;
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+
+
+@Service("${classname}Service")
+public class ${className}ServiceImpl implements ${className}Service {
+
+
+
+}
