@@ -1,6 +1,6 @@
 package ${package}.${moduleName}.dao;
 
-import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.entity.${className};
 import org.springframework.data.jpa.repository.JpaRepository;
 ##<#list imports as import>
 ##import ${import};
@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 * @email ${email}
 * @date ${datetime}
 */
-public interface ${className}Repository extends JpaRepository<${className}Entity, Long> {
+public interface ${className}Repository extends JpaRepository<${className}, Long> {
 }

@@ -24,7 +24,7 @@ import java.util.Date;
  * @date ${datetime}
  */
 @Data
-public class ${className}Entity {
+public class ${className} {
 
 #foreach ($column in $columns)
     /**

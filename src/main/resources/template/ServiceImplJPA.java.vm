@@ -2,7 +2,7 @@ package ${package}.${moduleName}.service.impl;
 
 
 import ${package}.${moduleName}.dao.${className}Repository;
-import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.service.${className}Service;
 
 
