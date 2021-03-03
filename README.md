@@ -8,4 +8,4 @@
 - pom依赖
 - ~~mybatis和jpa entity注解不同~~
 - mybatis和jpa entity其他方面的不同
-
+- 包名错误
