@@ -1,7 +1,7 @@
 package ${package}.${moduleName}.service;
 
-import ${mainPath}.common.utils.PageUtils;
-import ${package}.${moduleName}.entity.${className};
+##import ${mainPath}.common.utils.PageUtils;
+##import ${package}.${moduleName}.entity.${className};
 
 import java.util.Map;
 

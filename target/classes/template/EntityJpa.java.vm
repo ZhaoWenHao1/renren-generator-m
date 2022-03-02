@@ -1,8 +1,10 @@
 package ${package}.${moduleName}.entity;
 
 import lombok.Data;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Entity;
+import javax.persistence.Column;
 #if(${hasAutoIncrement})
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +22,11 @@ import java.util.Date;
  * ${comments}
  *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
 @Data
-public class ${className}Entity {
+@Entity
+public class ${className} {
 
 #foreach ($column in $columns)
     /**
@@ -34,8 +36,12 @@ public class ${className}Entity {
     @Id
 #end
 #if($column.extra == "auto_increment")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 #end
+#if($column.comments != '')
+    @ApiModelProperty(value = "${column.comments}")
+#end
+    @Column(name = "$column.columnName")
     private $column.attrType $column.attrname;
 
 #end

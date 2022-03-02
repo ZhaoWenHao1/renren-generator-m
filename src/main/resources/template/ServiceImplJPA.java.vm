@@ -5,6 +5,7 @@ import ${package}.${moduleName}.dao.${className}Repository;
 import ${package}.${moduleName}.entity.${className};
 import ${package}.${moduleName}.service.${className}Service;
 
+import org.springframework.stereotype.Service;
 
 @Service("${classname}Service")
 public class ${className}ServiceImpl implements ${className}Service {
